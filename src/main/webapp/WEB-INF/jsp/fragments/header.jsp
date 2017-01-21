@@ -31,8 +31,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="/resources/css/bootstrap.css">
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/datatables/1.10.13/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="/resources/css/portfolio-item.css">
+    <link rel="stylesheet" href="resources/css/portfolio-item.css">
 </head>
