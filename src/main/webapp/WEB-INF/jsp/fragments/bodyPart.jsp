@@ -26,7 +26,7 @@
                     <a href="https://github.com/foxandr"><spring:message code="app.github"/></a>
                 </li>
                 <li>
-                    <a href="#"><spring:message code="app.project"/></a>
+                    <a href="https://github.com/foxandr/robots/archive/master.zip"><spring:message code="app.project"/></a>
                 </li>
             </ul>
         </div>
