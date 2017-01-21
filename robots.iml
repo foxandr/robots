@@ -58,8 +58,5 @@
     <orderEntry type="library" name="Maven: org.webjars:bootstrap:3.3.7" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.bower:noty:2.3.8" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars:datatables:1.10.13" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.el:javax.el-api:2.2.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
   </component>
 </module>
