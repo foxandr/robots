@@ -2,10 +2,7 @@ package fox.alex.robots.service;
 
 import fox.alex.robots.model.robot.Robot;
 import fox.alex.robots.model.task.TypeTask;
-import fox.alex.robots.util.exception.BusyAllRobotsException;
-import fox.alex.robots.util.exception.BusyRobotException;
-import fox.alex.robots.util.exception.RobotNotFoundException;
-import fox.alex.robots.util.exception.TooManyRobotsException;
+import fox.alex.robots.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +58,10 @@ public class RobotServiceImpl implements RobotService {
         robotsPool.submit(robot);
     }
 
-    public void addBroadcastTask(TypeTask task) throws BusyAllRobotsException {
+    public void addBroadcastTask(TypeTask task) throws BusyAllRobotsException, NoRobotException {
         Collection<Robot> robots = getAllRobots();
         int size = robots.size();
+        if (size == 0) throw new NoRobotException();
         final int[] busy = {0};
         robots.stream()
                 .forEach(r -> {

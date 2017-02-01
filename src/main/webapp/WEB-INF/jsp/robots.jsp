@@ -85,6 +85,8 @@
 
     <jsp:include page="popups/killRobot.jsp"/>
 
+    <jsp:include page="popups/emptyWorld.jsp"/>
+
     <jsp:include page="fragments/footer.jsp"/>
 
 </div>

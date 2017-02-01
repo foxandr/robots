@@ -2,10 +2,7 @@ package fox.alex.robots.service;
 
 import fox.alex.robots.model.robot.Robot;
 import fox.alex.robots.model.task.TypeTask;
-import fox.alex.robots.util.exception.BusyAllRobotsException;
-import fox.alex.robots.util.exception.BusyRobotException;
-import fox.alex.robots.util.exception.RobotNotFoundException;
-import fox.alex.robots.util.exception.TooManyRobotsException;
+import fox.alex.robots.util.exception.*;
 
 import java.util.Collection;
 
@@ -33,6 +30,6 @@ public interface RobotService {
 
     void addPersonalTask(String name, TypeTask task) throws BusyRobotException, RobotNotFoundException;
 
-    void addBroadcastTask(TypeTask task) throws BusyAllRobotsException;
+    void addBroadcastTask(TypeTask task) throws BusyAllRobotsException, NoRobotException;
 
 }

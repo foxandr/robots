@@ -14,14 +14,18 @@ function show(lang) {
 function openWindow(taskName, selector) {
     var result = $.parseJSON(getRobotsName()["responseText"]);
     if (result){
-        var sel = $("#" + selector);
-        sel.find("option").remove();
-        $.each(result, function(key, value) {
-            sel.append($("<option></option>")
+        if (result.length == 0) {
+            $("#emptyWorld").modal();
+        } else {
+            var sel = $("#" + selector);
+            sel.find("option").remove();
+            $.each(result, function (key, value) {
+                sel.append($("<option></option>")
                     .attr("value", value)
                     .text(value));
-        });
-        $("#"+ taskName).modal();
+            });
+            $("#" + taskName).modal();
+        }
     }
 }
 

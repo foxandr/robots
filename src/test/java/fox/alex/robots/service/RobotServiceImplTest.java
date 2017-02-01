@@ -4,10 +4,7 @@ import fox.alex.robots.model.robot.BuildRobot;
 import fox.alex.robots.model.robot.ProgRobot;
 import fox.alex.robots.model.robot.Robot;
 import fox.alex.robots.model.robot.SingRobot;
-import fox.alex.robots.util.exception.BusyAllRobotsException;
-import fox.alex.robots.util.exception.BusyRobotException;
-import fox.alex.robots.util.exception.RobotNotFoundException;
-import fox.alex.robots.util.exception.TooManyRobotsException;
+import fox.alex.robots.util.exception.*;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.Stopwatch;
@@ -162,6 +159,13 @@ public class RobotServiceImplTest {
     public void addBroadcastTaskAllBusy() {
         robotService.addBroadcastTask(DISCOVER.typeTask);
         robotService.addBroadcastTask(BUILD.typeTask);
+    }
+
+    @Test (expected = NoRobotException.class)
+    public void addBroadcastTaskNoRobots() {
+        ROBOTS_LIST.stream()
+                .forEach(robot -> robotService.removeRobot(robot));
+        robotService.addBroadcastTask(DISCOVER.typeTask);
     }
 
     @Test

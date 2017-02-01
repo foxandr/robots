@@ -25,7 +25,7 @@ function getNewLogs() {
             $.each(result, function(key, value) {
                  str = value + "\n" + str;
             });
-            $("#logs").text(str);
+            $("#logs").val(str);
         },
         error: function (response) {
             failNoty(response);

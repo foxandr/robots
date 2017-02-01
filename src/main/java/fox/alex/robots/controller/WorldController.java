@@ -5,10 +5,7 @@ import fox.alex.robots.model.task.Task;
 import fox.alex.robots.model.task.TypeTask;
 import fox.alex.robots.service.RobotService;
 import fox.alex.robots.util.RobotGenerator;
-import fox.alex.robots.util.exception.BusyAllRobotsException;
-import fox.alex.robots.util.exception.BusyRobotException;
-import fox.alex.robots.util.exception.RobotNotFoundException;
-import fox.alex.robots.util.exception.TooManyRobotsException;
+import fox.alex.robots.util.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,10 +75,14 @@ public class WorldController implements Runnable {
         try {
             logQueue.add(simpleName + ":msg.wc.broadcast");
             robotService.addBroadcastTask(task.typeTask);
-        } catch (BusyAllRobotsException e){
-            logQueue.add(simpleName + ":msg.wc.allbusy");
+        } catch (NoRobotException e) {
+            logQueue.add(simpleName + ":msg.wc.norobots");
             addNewRobotWithTask(task);
             LOG.debug(e.getMessage(), e);
+        } catch (BusyAllRobotsException e1){
+            logQueue.add(simpleName + ":msg.wc.allbusy");
+            addNewRobotWithTask(task);
+            LOG.debug(e1.getMessage(), e1);
         }
     }
 
