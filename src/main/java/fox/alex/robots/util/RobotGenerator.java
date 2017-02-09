@@ -43,7 +43,8 @@ public class RobotGenerator {
             case COUNT_NUMBERS: return new MathRobot();
             case DISCOVER_NEW: return new ScienceRobot();
             case SING_SONG: return new SingRobot();
-            default: return new ProgRobot();
+            case WRITE_CODE: return new ProgRobot();
+            default: return getRandomRobot();
         }
     }
 
