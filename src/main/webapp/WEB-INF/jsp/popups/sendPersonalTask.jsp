@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-4 col-xs-5">
-                            <button type="button" class="btn btn-info" onclick="sendAjax('sendPersonalTask', 'personal', 'prsTask')"><spring:message code="common.apply"/></button>
+                            <button type="button" class="btn btn-info" onclick="sendPersonal()"><spring:message code="common.apply"/></button>
                             <button type="button" class="btn btn-warning" data-dismiss="modal" aria-hidden="true"><spring:message code="common.cancel"/></button>
                         </div>
                     </div>

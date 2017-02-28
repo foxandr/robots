@@ -33,17 +33,3 @@ function openNonSelectorWindow(taskName) {
     $("#"+ taskName).modal();
 }
 
-function submitForm(windowName, formName, ajaxEnding) {
-    form = $("#" + formName);
-
-    form.submit(function () {
-        sendAjax(windowName, ajaxEnding, formName);
-        return false;
-    });
-
-    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
-        failNoty(event, jqXHR, options, jsExc);
-    });
-}
-
-

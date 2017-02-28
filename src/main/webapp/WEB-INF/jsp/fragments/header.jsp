@@ -33,6 +33,5 @@
 
     <link rel="stylesheet" href="resources/css/bootstrap.css">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="webjars/datatables/1.10.13/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="resources/css/portfolio-item.css">
 </head>
