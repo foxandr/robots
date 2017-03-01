@@ -32,7 +32,7 @@ public class RobotServiceImpl implements RobotService {
     public final static int MAP_SIZE = 100;
 
     public void addRobot(Robot robot) throws TooManyRobotsException {
-        if (robotsMap.size() > MAP_SIZE) throw new TooManyRobotsException();
+        if (robotsMap.size() >= MAP_SIZE) throw new TooManyRobotsException();
         robotsMap.putIfAbsent(robot.name, robot);
     }
 

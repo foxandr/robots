@@ -7,8 +7,6 @@ import fox.alex.robots.service.RobotService;
 import fox.alex.robots.util.RobotGenerator;
 import fox.alex.robots.util.exception.RobotNotFoundException;
 import fox.alex.robots.util.exception.TooManyRobotsException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -30,14 +28,8 @@ public abstract class AbstractRobotController {
     @Resource
     protected Queue<String> logQueue;
 
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
-
-    public void sendTask(Task task) {
-        try {
-            taskQueue.add(task);
-        } catch (IllegalStateException e){
-            LOG.debug(e.getMessage(), e);
-        }
+    public void sendTask(Task task) throws IllegalStateException {
+        taskQueue.add(task);
     }
 
     public void addNewRobot(TypeTask task) {
@@ -48,7 +40,6 @@ public abstract class AbstractRobotController {
             logQueue.add(newRobot.name + ":msg.wc.newrobot");
         } catch (TooManyRobotsException e){
             logQueue.add("WorldController:msg.wc.over");
-            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -58,7 +49,6 @@ public abstract class AbstractRobotController {
             logQueue.add(name + ":msg.wc.kill");
         } catch (RobotNotFoundException e){
             logQueue.add(name + ":msg.wc.nfd");
-            LOG.debug(e.getMessage(), e);
         }
     }
 

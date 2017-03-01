@@ -6,8 +6,6 @@ import fox.alex.robots.model.task.TypeTask;
 import fox.alex.robots.service.RobotService;
 import fox.alex.robots.util.RobotGenerator;
 import fox.alex.robots.util.exception.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -53,8 +51,6 @@ public class WorldController implements Runnable {
     @Resource
     private Queue<String> logQueue;
 
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
-
     public void run() {
         logQueue.add(simpleName + ":msg.wc.run");
         while (true){
@@ -78,11 +74,9 @@ public class WorldController implements Runnable {
         } catch (NoRobotException e) {
             logQueue.add(simpleName + ":msg.wc.norobots");
             addNewRobotWithTask(task);
-            LOG.debug(e.getMessage(), e);
         } catch (BusyAllRobotsException e1){
             logQueue.add(simpleName + ":msg.wc.allbusy");
             addNewRobotWithTask(task);
-            LOG.debug(e1.getMessage(), e1);
         }
     }
 
@@ -92,11 +86,9 @@ public class WorldController implements Runnable {
             robotService.addPersonalTask(task.robotName, task.typeTask);
         } catch (RobotNotFoundException e){
             logQueue.add(task.robotName + ":msg.wc.nfd");
-            LOG.info(e.getMessage(), e);
         } catch (BusyRobotException e){
             logQueue.add(task.robotName + ":msg.wc.busy");
             if (!TypeTask.SUICIDE.equals(task.typeTask)) addNewRobotWithTask(task);
-            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -105,7 +97,6 @@ public class WorldController implements Runnable {
             robotService.addRobot(createNewRobot(task));
         } catch (TooManyRobotsException e){
             logQueue.add(simpleName + ":msg.wc.over");
-            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -116,7 +107,6 @@ public class WorldController implements Runnable {
             robotService.addRobotWithTask(newRobot);
         } catch (TooManyRobotsException e){
             logQueue.add(simpleName + ":msg.wc.over");
-            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -126,7 +116,6 @@ public class WorldController implements Runnable {
             logQueue.add(robotName + ":msg.wc.kill");
         } catch (RobotNotFoundException e){
             logQueue.add(robotName + ":msg.wc.nfd");
-            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -172,13 +161,7 @@ public class WorldController implements Runnable {
     public void destroy(){
         singleExecutorService.shutdownNow();
         robotService.getAllRobots().stream()
-                .forEach(r -> {
-                    try {
-                        robotService.removeRobot(r);
-                    } catch (RobotNotFoundException e){
-                        LOG.debug(e.getMessage(), e);
-                    }
-                });
+                .forEach(r -> robotService.removeRobot(r));
         logQueue.add(simpleName + ":msg.wc.last");
     }
 }

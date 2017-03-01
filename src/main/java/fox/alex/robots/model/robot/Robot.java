@@ -2,8 +2,6 @@ package fox.alex.robots.model.robot;
 
 import fox.alex.robots.model.task.TypeTask;
 import fox.alex.robots.util.exception.BusyRobotException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Queue;
 
@@ -25,8 +23,6 @@ import java.util.Queue;
 public abstract class Robot implements Runnable {
 
     private volatile boolean alive = true;
-
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
 
     protected Queue<String> logQueue;
 
@@ -66,7 +62,6 @@ public abstract class Robot implements Runnable {
                 perform();
             }
         } catch (InterruptedException e) {
-            LOG.debug(e.getMessage(), e);
             alive = false;
             logQueue.add(name + ":msg.all.error");
         } finally {

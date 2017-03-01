@@ -2,8 +2,6 @@ package fox.alex.robots.util;
 
 import fox.alex.robots.model.robot.*;
 import fox.alex.robots.model.task.TypeTask;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +14,6 @@ import java.util.Random;
 public class RobotGenerator {
 
     private static Class[] classes = {BuildRobot.class, MathRobot.class, ProgRobot.class, ScienceRobot.class, SingRobot.class};
-    private final static Logger LOG = LoggerFactory.getLogger(RobotGenerator.class.getSimpleName());
 
     public static Robot getRandomRobot() {
         Random random = new Random();
@@ -24,7 +21,6 @@ public class RobotGenerator {
         try {
             return (Robot) classes[number].newInstance();
         } catch (Exception e) {
-            LOG.warn(e.getMessage(), e);
             return new BuildRobot();
         }
     }
