@@ -69,8 +69,8 @@ public class WorldController implements Runnable {
 
     private void sendBroadcastTask(Task task) {
         try {
-            logQueue.add(simpleName + ":msg.wc.broadcast");
             robotService.addBroadcastTask(task.typeTask);
+            logQueue.add(simpleName + ":msg.wc.broadcast");
         } catch (NoRobotException e) {
             logQueue.add(simpleName + ":msg.wc.norobots");
             addNewRobotWithTask(task);
@@ -82,10 +82,10 @@ public class WorldController implements Runnable {
 
     private void sendPersonalTask(Task task) {
         try {
-            logQueue.add(task.robotName + ":msg.wc.personal");
             robotService.addPersonalTask(task.robotName, task.typeTask);
+            logQueue.add(task.robotName + ":msg.wc.personal");
         } catch (RobotNotFoundException e){
-            logQueue.add(task.robotName + ":msg.wc.nfd");
+            logQueue.add(simpleName + ":msg.wc.nfd");
         } catch (BusyRobotException e){
             logQueue.add(task.robotName + ":msg.wc.busy");
             if (!TypeTask.SUICIDE.equals(task.typeTask)) addNewRobotWithTask(task);
@@ -95,17 +95,21 @@ public class WorldController implements Runnable {
     private void addNewRobot(Task task) {
         try {
             robotService.addRobot(createNewRobot(task));
-        } catch (TooManyRobotsException e){
+        } catch (WrongTaskException e){
+            logQueue.add("WorldController:task.wrong");
+        } catch (TooManyRobotsException e1){
             logQueue.add(simpleName + ":msg.wc.over");
         }
     }
 
     private void addNewRobotWithTask(Task task) {
-        Robot newRobot = createNewRobot(task);
-        newRobot.setTask(task.typeTask);
         try {
+            Robot newRobot = createNewRobot(task);
+            newRobot.setTask(task.typeTask);
             robotService.addRobotWithTask(newRobot);
-        } catch (TooManyRobotsException e){
+        } catch (WrongTaskException e){
+            logQueue.add("WorldController:task.wrong");
+        } catch (TooManyRobotsException e1){
             logQueue.add(simpleName + ":msg.wc.over");
         }
     }
@@ -141,7 +145,7 @@ public class WorldController implements Runnable {
         return RobotGenerator.getRandomRobots(INT_NUM_OF_ROBOTS);
     }
 
-    private Robot createNewRobot(Task task) {
+    private Robot createNewRobot(Task task) throws WrongTaskException {
         Robot newRobot = RobotGenerator.getRobot(task.typeTask);
         newRobot.setLogQueue(logQueue);
         logQueue.add(newRobot.name + ":msg.wc.newrobot");

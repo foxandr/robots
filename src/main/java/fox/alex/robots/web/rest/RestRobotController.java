@@ -27,19 +27,22 @@ public class RestRobotController extends AbstractRobotController {
 
     @RequestMapping(value = "/robots/{name}/tasks/{taskId}", method = RequestMethod.PUT)
     public void personalTask(@PathVariable("name") String robotName, @PathVariable("taskId") int taskId){
-        Task task = new Task(robotName, TypeTask.values()[taskId]);
+        Task task = null;
+        if (taskId < TypeTask.values().length) task = new Task(robotName, TypeTask.values()[taskId]);
         super.sendTask(task);
     }
 
     @RequestMapping(value = "/robots/all/tasks/{taskId}", method = RequestMethod.PUT)
     public void broadcastTask(@PathVariable("taskId") int taskId){
-        Task task = new Task(null, TypeTask.values()[taskId]);
+        Task task = null;
+        if (taskId < TypeTask.values().length) task = new Task(null, TypeTask.values()[taskId]);
         super.sendTask(task);
     }
 
     @RequestMapping(value = "/robots", method = RequestMethod.POST)
     public void add(@RequestParam("id") int taskId) {
-        super.addNewRobot(TypeTask.values()[taskId]);
+        if (taskId < TypeTask.values().length) super.addNewRobot(TypeTask.values()[taskId]);
+        else super.addNewRobot(null);
     }
 
     @RequestMapping(value = "/robots/{name}", method = RequestMethod.DELETE)

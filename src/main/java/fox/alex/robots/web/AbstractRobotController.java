@@ -7,6 +7,7 @@ import fox.alex.robots.service.RobotService;
 import fox.alex.robots.util.RobotGenerator;
 import fox.alex.robots.util.exception.RobotNotFoundException;
 import fox.alex.robots.util.exception.TooManyRobotsException;
+import fox.alex.robots.util.exception.WrongTaskException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -28,22 +29,28 @@ public abstract class AbstractRobotController {
     @Resource
     protected Queue<String> logQueue;
 
-    public void sendTask(Task task) throws IllegalStateException {
-        taskQueue.add(task);
+    public void sendTask(Task task) {
+        try {
+            taskQueue.add(task);
+        } catch (NullPointerException e){
+            logQueue.add("WorldController:task.wrong");
+        }
     }
 
     public void addNewRobot(TypeTask task) {
-        Robot newRobot = RobotGenerator.getRobot(task);
-        newRobot.setLogQueue(logQueue);
         try {
+            Robot newRobot = RobotGenerator.getRobot(task);
+            newRobot.setLogQueue(logQueue);
             robotService.addRobot(newRobot);
             logQueue.add(newRobot.name + ":msg.wc.newrobot");
-        } catch (TooManyRobotsException e){
+        } catch (WrongTaskException e) {
+            logQueue.add("WorldController:task.wrong");
+        } catch (TooManyRobotsException e1){
             logQueue.add("WorldController:msg.wc.over");
         }
     }
 
-    public void killRobot(String name) throws IllegalStateException {
+    public void killRobot(String name) {
         try {
             robotService.removeRobotByName(name);
             logQueue.add(name + ":msg.wc.kill");

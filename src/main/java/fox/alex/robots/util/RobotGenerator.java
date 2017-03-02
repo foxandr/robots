@@ -2,6 +2,7 @@ package fox.alex.robots.util;
 
 import fox.alex.robots.model.robot.*;
 import fox.alex.robots.model.task.TypeTask;
+import fox.alex.robots.util.exception.WrongTaskException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,14 +34,14 @@ public class RobotGenerator {
         return collection;
     }
 
-    public static Robot getRobot(TypeTask task) {
+    public static Robot getRobot(TypeTask task) throws WrongTaskException {
+        if (task == null) throw new WrongTaskException();
         switch (task){
             case BUILD_HOUSE: return new BuildRobot();
             case COUNT_NUMBERS: return new MathRobot();
             case DISCOVER_NEW: return new ScienceRobot();
             case SING_SONG: return new SingRobot();
-            case WRITE_CODE: return new ProgRobot();
-            default: return getRandomRobot();
+            default: return new ProgRobot();
         }
     }
 
