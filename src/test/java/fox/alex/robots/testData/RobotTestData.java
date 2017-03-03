@@ -31,6 +31,8 @@ public class RobotTestData {
     public static final Task SING = new Task(SINGER.name, TypeTask.SING_SONG);
     public static final Task CODE = new Task(PROGRAMMER.name, TypeTask.WRITE_CODE);
 
+    public static final String CLASS_NAME = "ScienceRobot";
+
     public static final Task DISCOVER = new Task(null, TypeTask.DISCOVER_NEW);
 
     public static final Collection<Robot> ROBOTS_LIST = Arrays.asList(BUILDER, SINGER, PROGRAMMER);

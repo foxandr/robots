@@ -9,6 +9,7 @@ import fox.alex.robots.util.exception.RobotNotFoundException;
 import fox.alex.robots.util.exception.TooManyRobotsException;
 import fox.alex.robots.util.exception.WrongTaskException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public abstract class AbstractRobotController {
 
     @Resource
     protected Queue<String> logQueue;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
     public void sendTask(Task task) {
         try {
