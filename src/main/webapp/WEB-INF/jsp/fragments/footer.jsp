@@ -29,12 +29,9 @@
     <!-- /.row -->
 </footer>
 
-<spring:url value="/resources/js/ajaxScripts.js" var="ajax" />
-
 <script type="text/javascript" src="webjars/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-<%--<script type="text/javascript" src="resources/js/ajaxScripts.js"></script>--%>
-<script type="text/javascript" src="${ajax}"></script>
+<script type="text/javascript" src="resources/js/ajaxScripts.js"></script>
 <script type="text/javascript" src="resources/js/commonScripts.js"></script>
 <script type="text/javascript" src="resources/js/pageNotes.js"></script>
