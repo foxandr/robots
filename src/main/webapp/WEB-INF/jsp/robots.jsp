@@ -91,6 +91,5 @@
 
 </div>
 <!-- /.container -->
-<script type="text/javascript" src="resources/js/ajaxScripts.js"></script>
 </body>
 </html>
