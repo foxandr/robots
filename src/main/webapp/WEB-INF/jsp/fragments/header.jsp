@@ -21,9 +21,6 @@
 
     <title><spring:message code="app.title"/></title>
 
-    <%--<c:set var="url">${pageContext.request.requestURL}</c:set>--%>
-    <%--<base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />--%>
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
