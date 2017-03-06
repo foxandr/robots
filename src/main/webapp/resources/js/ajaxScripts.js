@@ -7,7 +7,7 @@ var ajaxUrl = "ajax/";
 function getRobotsName() {
     return $.ajax({
         type: "GET",
-        url: ajaxUrl + "robots/all/",
+        url: ajaxUrl + "robots/all",
         async: false,
         error: function (response) {
             failNoty(response);
@@ -18,7 +18,7 @@ function getRobotsName() {
 function getNewLogs() {
     $.ajax({
         type: "GET",
-        url: ajaxUrl + "logs/",
+        url: ajaxUrl + "logs",
         async: true,
         success: function (result) {
             var str = "";
@@ -36,7 +36,7 @@ function getNewLogs() {
 function sendPersonal() {
     $.ajax({
         type: "PUT",
-        url: ajaxUrl + "robots/" + $("#prsTask select[name=name]").val() + "/tasks/" + $("#prsTask select[name=id]").val() + "/",
+        url: ajaxUrl + "robots/" + $("#prsTask select[name=name]").val() + "/tasks/" + $("#prsTask select[name=id]").val(),
         async: false,
         success: function () {
             successNoty("The task was sent.");
@@ -48,7 +48,7 @@ function sendPersonal() {
 function sendBroadcast() {
     $.ajax({
         type: "PUT",
-        url: ajaxUrl + "robots/all/tasks/" + $("#brdTask select[name=id]").val() + "/",
+        url: ajaxUrl + "robots/all/tasks/" + $("#brdTask select[name=id]").val(),
         async: false,
         success: function () {
             successNoty("The task was sent.");
@@ -60,7 +60,7 @@ function sendBroadcast() {
 function addRobot() {
     $.ajax({
         type: "POST",
-        url: ajaxUrl + "robots/",
+        url: ajaxUrl + "robots",
         data: $("#add").serialize(),
         success: function () {
             successNoty("The task was sent.");
@@ -72,7 +72,7 @@ function addRobot() {
 function killRobot() {
     $.ajax({
         type: "DELETE",
-        url: ajaxUrl + "robots/" + $("#suicide").val() + "/",
+        url: ajaxUrl + "robots/" + $("#suicide").val(),
         async: false,
         success: function () {
             successNoty("The task was sent.");
