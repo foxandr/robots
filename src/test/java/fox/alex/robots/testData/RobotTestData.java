@@ -32,6 +32,8 @@ public class RobotTestData {
     public static final Task CODE = new Task(PROGRAMMER.name, TypeTask.WRITE_CODE);
 
     public static final String CLASS_NAME = "ScienceRobot";
+    public static final String LOC = "en";
+    public static final int TASK_ID = 1;
 
     public static final Task DISCOVER = new Task(null, TypeTask.DISCOVER_NEW);
 

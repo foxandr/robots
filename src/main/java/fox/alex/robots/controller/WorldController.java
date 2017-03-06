@@ -135,7 +135,7 @@ public class WorldController implements Runnable {
         }
     }
 
-    public void checkLogActivity(){
+    private void checkLogActivity(){
         while (logQueue.size() > MAX_LOG){
             logQueue.poll();
         }

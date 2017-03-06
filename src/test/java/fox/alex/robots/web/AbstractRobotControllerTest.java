@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -48,6 +49,9 @@ public abstract class AbstractRobotControllerTest {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
     protected MockMvc mockMvc;
+
+    @Autowired
+    protected MessageSource messageSource;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -100,7 +104,14 @@ public abstract class AbstractRobotControllerTest {
 
     @After
     public void tearDown() throws Exception {
-
+        Field fld = Arrays.stream(robotService.getClass().getDeclaredFields())
+                .filter(field -> Modifier.isPrivate(field.getModifiers()))
+                .filter(field -> field.getName().equals("robotsMap"))
+                .findFirst()
+                .get();
+        fld.setAccessible(true);
+        ConcurrentHashMap<String, Robot> robotsMap = (ConcurrentHashMap<String, Robot>) fld.get(robotService);
+        robotsMap.clear();
     }
 
 
