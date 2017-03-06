@@ -7,7 +7,7 @@ var ajaxUrl = "ajax/";
 function getRobotsName() {
     return $.ajax({
         type: "GET",
-        url: ajaxUrl + "robots/all",
+        url: ajaxUrl + "robots/all/",
         async: false,
         error: function (response) {
             failNoty(response);
