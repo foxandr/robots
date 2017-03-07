@@ -1,7 +1,6 @@
 package fox.alex.robots.web;
 
 import fox.alex.robots.model.robot.Robot;
-import fox.alex.robots.model.task.Task;
 import fox.alex.robots.service.RobotService;
 import org.junit.After;
 import org.junit.Before;
@@ -58,9 +57,6 @@ public abstract class AbstractRobotControllerTest {
 
     @Autowired
     protected RobotService robotService;
-
-    @Resource
-    protected Queue<Task> taskQueue;
 
     @Resource
     protected Queue<String> logQueue;
